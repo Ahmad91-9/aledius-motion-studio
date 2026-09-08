@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aledius — Explainer Video Studio (Rendite)</title>
+  <meta name="description" content="Interaktive Motion Graphics und Video-Animation für Aledius Asset Management: Rendite">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Header Navigation -->
+    <header class="studio-header">
+      <div class="brand-badge">
+        <span class="brand-dot"></span>
+        <span class="brand-title">ALEDIUS MOTION STUDIO</span>
+        <span class="brand-tag">9:16 VERTICAL 1080×1920</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-mode-full" class="mode-pill active">Vollversion (Social Media)</button>
+        <button id="btn-mode-nointro" class="mode-pill">Sales-App (Ohne Intro)</button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="studio-main">
+      <!-- Left: Interactive Video Canvas Viewport -->
+      <div class="viewport-wrapper">
+        <div id="video-frame" class="video-container 9-16">
+          <!-- Background / Video Element -->
+          <video id="avatar-video" src="01_Rendite_raw_final.mp4" playsinline preload="auto"></video>
+
+          <!-- Layer 1: Ambient Background Canvas for Intro / Outro -->
+          <canvas id="ambient-canvas" class="layer-canvas"></canvas>
+
+          <!-- Layer 2: Permanent Watermark Logo (Top-Left) -->
+          <div id="watermark-layer" class="watermark-container">
+            <img src="logos/aledius_logo_white.png" alt="Aledius" class="watermark-logo">
+          </div>
+
+          <!-- Layer 3: Animated Intro Screen (0.0s - 2.5s) -->
+          <div id="intro-layer" class="motion-scene intro-scene">
+            <div class="intro-content">
+              <div class="intro-glow"></div>
+              <div class="logo-wrapper">
+                <div class="actual-logo-container">
+                  <img src="logos/aledius_logo_white.png" alt="Aledius Asset Management" class="actual-intro-logo">
+                  <div class="shimmer-light"></div>
+                </div>
+                <div class="intro-tagline-bar">
+                  <span class="category-pill">FINANZWISSEN</span>
+                  <span class="category-sep">·</span>
+                  <span class="category-sub">ASSET MANAGEMENT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 4: Title Card Overlay (0.0s - 2.5s of Main Scene) -->
+          <div id="title-card-layer" class="motion-scene title-card-scene">
+            <div class="title-card-pill">
+              <div class="title-card-glow"></div>
+              <h2 class="title-term">Rendite</h2>
+              <p class="title-subline">Finanzbegriffe einfach erklärt</p>
+            </div>
+          </div>
+
+          <!-- Layer 5: Lower Third Presenter ("Moritz") -->
+          <div id="lower-third-layer" class="lower-third-container">
+            <div class="lower-third-pill">
+              <span class="lt-accent-bar"></span>
+              <span class="lt-name">Moritz</span>
+            </div>
+          </div>
+
+          <!-- Layer 6: Dynamic Key-Term Overlays (Top-Right) -->
+          <div id="keyterm-layer" class="keyterm-container">
+            <div id="keyterm-pill" class="keyterm-pill">
+              <span class="keyterm-icon">✦</span>
+              <span id="keyterm-text" class="keyterm-label">Nominale Rendite</span>
+            </div>
+          </div>
+
+          <!-- Layer 7: Burned-in Subtitles (Bottom-Center) -->
+          <div id="subtitles-layer" class="subtitles-container">
+            <div id="sub-card" class="subtitle-card">
+              <p id="sub-text" class="subtitle-text">Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage</p>
+            </div>
+          </div>
+
+          <!-- Layer 8: Animated Outro Screen (3.0s) -->
+          <div id="outro-layer" class="motion-scene outro-scene">
+            <div class="outro-content">
+              <div class="outro-glow"></div>
+              <div class="outro-logo-group">
+                <img src="logos/aledius_logo_white.png" alt="Aledius Asset Management" class="actual-outro-logo">
+              </div>
+              <div class="outro-divider-line"></div>
+              <p class="outro-claim">Vermögensverwaltung neu gedacht.</p>
+              <a href="https://www.aledius.com" target="_blank" class="outro-website">www.aledius.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Studio Controls, Timeline & Scene Triggers -->
+      <aside class="studio-sidebar">
+        <!-- Playback Controller Card -->
+        <div class="panel-card playback-panel">
+          <div class="panel-header">
+            <h3>MASTER WIEDERGABE</h3>
+            <span id="time-display" class="time-readout">00:00.0 / 00:42.0</span>
+          </div>
+
+          <div class="scrubber-wrapper">
+            <input type="range" id="timeline-slider" min="0" max="42" step="0.05" value="0" class="custom-slider">
+            <div class="timeline-markers">
+              <span class="marker marker-intro" title="Intro (0.0s - 2.5s)">Intro</span>
+              <span class="marker marker-tc" title="Title Card">Titel</span>
+              <span class="marker marker-lt" title="Lower Third (Moritz)">Moritz</span>
+              <span class="marker marker-keys" title="Key-Terms">Begriffe</span>
+              <span class="marker marker-outro" title="Outro">Outro</span>
+            </div>
+          </div>
+
+          <div class="control-btn-group">
+            <button id="btn-play-pause" class="btn-primary" aria-label="Abspielen/Pause">
+              <span id="play-icon">▶</span> <span id="play-text">Video Abspielen</span>
+            </button>
+            <button id="btn-restart" class="btn-secondary" title="Neu Starten">↺</button>
+            <button id="btn-audio-toggle" class="btn-secondary" title="Audio ein/aus">🔊</button>
+          </div>
+        </div>
+
+        <!-- Scene Selector & Preview -->
+        <div class="panel-card scene-panel">
+          <h3>EINZELSZENEN TESTEN</h3>
+          <p class="panel-desc">Klicken Sie auf eine Szene, um die jeweilige Animation isoliert abzuspielen:</p>
+
+          <div class="scene-buttons-grid">
+            <button id="btn-preview-intro" class="scene-btn">
+              <div class="scene-btn-icon">⚡</div>
+              <div class="scene-btn-info">
+                <strong>1. Intro Opener</strong>
+                <span>2.5 Sek. · Motion Graphics & Sound</span>
+              </div>
+            </button>
+
+            <button id="btn-preview-tc" class="scene-btn">
+              <div class="scene-btn-icon">🪪</div>
+              <div class="scene-btn-info">
+                <strong>2. Titelkarte "Rendite"</strong>
+                <span>2.0 Sek. · Branded Header Card</span>
+              </div>
+            </button>
+
+            <button id="btn-preview-lt" class="scene-btn">
+              <div class="scene-btn-icon">👤</div>
+              <div class="scene-btn-info">
+                <strong>3. Lower-Third "Moritz"</strong>
+                <span>4.0 Sek. · Vorname & Brand Accent</span>
+              </div>
+            </button>
+
+            <button id="btn-preview-keys" class="scene-btn">
+              <div class="scene-btn-icon">🏷️</div>
+              <div class="scene-btn-info">
+                <strong>4. Begriff-Overlays</strong>
+                <span>5 Synchrone Callouts (Inflation, etc.)</span>
+              </div>
+            </button>
+
+            <button id="btn-preview-outro" class="scene-btn">
+              <div class="scene-btn-icon">🌟</div>
+              <div class="scene-btn-info">
+                <strong>5. Outro Card</strong>
+                <span>3.0 Sek. · Claim & URL</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Animation Exporter (MediaRecorder) -->
+        <div class="panel-card export-panel">
+          <h3>ANIMATION EXPORTIEREN</h3>
+          <p class="panel-desc">Nehmen Sie die Intro- oder Outro-Animation in Echtzeit auf und laden Sie sie als Video-Clip herunter:</p>
+          <div class="export-btn-group">
+            <button id="btn-record-intro" class="btn-record">
+              <span class="record-dot"></span> Intro aufnehmen & speichern
+            </button>
+            <button id="btn-record-outro" class="btn-record">
+              <span class="record-dot"></span> Outro aufnehmen & speichern
+            </button>
+          </div>
+          <div id="export-status" class="export-status-text">Bereit zur Aufnahme</div>
+        </div>
+
+        <!-- Specifications Quick Reference -->
+        <div class="panel-card specs-panel">
+          <h3>ALEDIUS GUIDELINE CHECKS</h3>
+          <ul class="specs-checklist">
+            <li><span class="check-icon">✓</span> <strong>Schriftart:</strong> Montserrat (100% einheitlich)</li>
+            <li><span class="check-icon">✓</span> <strong>Primärfarbe:</strong> #267D58 (Aledius Grün)</li>
+            <li><span class="check-icon">✓</span> <strong>Format:</strong> 9:16 Vertikal (1080×1920)</li>
+            <li><span class="check-icon">✓</span> <strong>Wasserzeichen:</strong> Oben links mit Randabstand</li>
+            <li><span class="check-icon">✓</span> <strong>Lower-Third:</strong> Nur Vorname ("Moritz")</li>
+            <li><span class="check-icon">✓</span> <strong>Outro-Claim:</strong> "Vermögensverwaltung neu gedacht."</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

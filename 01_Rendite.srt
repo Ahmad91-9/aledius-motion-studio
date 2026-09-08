@@ -1,0 +1,43 @@
+1
+00:00:00,000 --> 00:00:05,220
+Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage
+
+2
+00:00:05,220 --> 00:00:07,400
+über einen bestimmten Zeitraum, üblicherweise auf ein Jahr bezogen.
+
+3
+00:00:07,400 --> 00:00:11,700
+Sie ist die zentrale Kennzahl, um den Erfolg einer Anlage zu messen
+
+4
+00:00:11,700 --> 00:00:13,700
+und verschiedene Investments vergleichbar zu machen.
+
+5
+00:00:13,700 --> 00:00:17,540
+Wichtig ist die Unterscheidung zwischen nominaler und realer Rendite:
+
+6
+00:00:17,540 --> 00:00:20,800
+Die nominale Rendite gibt den reinen Wertzuwachs an,
+
+7
+00:00:20,800 --> 00:00:24,500
+während die reale Rendite die Inflation herausrechnet und damit zeigt,
+
+8
+00:00:24,500 --> 00:00:27,740
+wie viel Kaufkraft tatsächlich hinzugewonnen wurde.
+
+9
+00:00:27,740 --> 00:00:32,780
+Ebenso relevant ist, ob eine Rendite vor oder nach Kosten und Steuern ausgewiesen wird.
+
+10
+00:00:32,780 --> 00:00:36,500
+Und eine hohe Rendite steht selten für sich allein —
+
+11
+00:00:36,500 --> 00:00:39,420
+sie ist fast immer die Kompensation für ein entsprechend höheres Risiko.
