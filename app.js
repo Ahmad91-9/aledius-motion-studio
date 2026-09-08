@@ -41,28 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnRecordOutro = document.getElementById('btn-record-outro');
   const exportStatus = document.getElementById('export-status');
 
-  // Subtitle timestamps (relative to the presenter video: 01_Rendite_raw_final.mp4)
+  // Subtitle timestamps synchronized from user's exact SRT file:
   const SUBTITLES = [
-    { start: 0.00, end: 5.22, text: "Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage" },
-    { start: 5.22, end: 7.40, text: "über einen bestimmten Zeitraum, üblicherweise auf ein Jahr bezogen." },
-    { start: 7.40, end: 11.70, text: "Sie ist die zentrale Kennzahl, um den Erfolg einer Anlage zu messen" },
-    { start: 11.70, end: 13.70, text: "und verschiedene Investments vergleichbar zu machen." },
-    { start: 13.70, end: 17.54, text: "Wichtig ist die Unterscheidung zwischen nominaler und realer Rendite:" },
-    { start: 17.54, end: 20.80, text: "Die nominale Rendite gibt den reinen Wertzuwachs an," },
-    { start: 20.80, end: 24.50, text: "während die reale Rendite die Inflation herausrechnet" },
-    { start: 24.50, end: 27.74, text: "und damit zeigt, wie viel Kaufkraft tatsächlich hinzugewonnen wurde." },
-    { start: 27.74, end: 32.78, text: "Ebenso relevant ist, ob eine Rendite vor oder nach Kosten und Steuern ausgewiesen wird." },
-    { start: 32.78, end: 36.50, text: "Und eine hohe Rendite steht selten für sich allein —" },
-    { start: 36.50, end: 39.42, text: "sie ist fast immer die Kompensation für ein entsprechend höheres Risiko." }
+    { start: 0.57, end: 3.83, text: "Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage über" },
+    { start: 3.83, end: 7.11, text: "einen bestimmten Zeitraum, üblicherweise auf ein Jahr bezogen." },
+    { start: 7.65, end: 9.83, text: "Sie ist die zentrale Kennzahl, um den Erfolg" },
+    { start: 9.83, end: 13.27, text: "einer Anlage zu messen und verschiedene Investments vergleichbar zu machen." },
+    { start: 13.77, end: 17.19, text: "Wichtig ist die Unterscheidung zwischen nominaler und realer Rendite." },
+    { start: 17.79, end: 20.75, text: "Die nominale Rendite gibt den reinen Wertzuwachs an," },
+    { start: 20.93, end: 24.07, text: "während die reale Rendite die Inflation herausrechnet und" },
+    { start: 24.07, end: 27.39, text: "damit zeigt, wie viel Kaufkraft tatsächlich hinzugewonnen wurde." },
+    { start: 27.39, end: 30.33, text: "Ebenso relevant ist, ob eine Rendite vor oder" },
+    { start: 30.33, end: 32.47, text: "nach Kosten und Steuern ausgewiesen wird." },
+    { start: 32.99, end: 35.01, text: "Und eine hohe Rendite steht selten für sich allein," },
+    { start: 35.01, end: 39.25, text: "sie ist fast immer die Kompensation für ein entsprechend höheres Risiko." }
   ];
 
-  // Keyterm overlays synchronized with narration
+  // Keyterm overlays synchronized with user narration timestamps
   const KEYTERMS = [
-    { start: 17.54, end: 20.80, text: "Nominale Rendite" },
-    { start: 20.80, end: 24.50, text: "Reale Rendite" },
-    { start: 24.50, end: 27.74, text: "Inflation" },
-    { start: 27.74, end: 32.78, text: "Kosten & Steuern" },
-    { start: 32.78, end: 39.40, text: "Rendite & Risiko" }
+    { start: 17.79, end: 20.75, text: "Nominale Rendite" },
+    { start: 20.93, end: 24.07, text: "Reale Rendite" },
+    { start: 22.50, end: 27.39, text: "Inflation" },
+    { start: 27.39, end: 32.47, text: "Kosten & Steuern" },
+    { start: 32.99, end: 39.25, text: "Rendite & Risiko" }
   ];
 
   // App State
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // FULL MODE (SOCIAL MEDIA CUT: Intro -> Avatar -> Outro)
       // ----------------------------------------------------
       if (currentTime < introDuration) {
-        // [0.0s - 2.5s] INTRO SCENE
+        // [0.0s - 2.5s] INTRO SCENE (Pure motion graphics bumper, no avatar behind)
         introLayer.classList.add('active');
         titleCardLayer.classList.remove('active');
         lowerThirdLayer.classList.remove('visible');
@@ -225,10 +226,12 @@ document.addEventListener('DOMContentLoaded', () => {
         outroLayer.classList.remove('active');
         watermarkLayer.classList.remove('visible');
 
+        video.style.opacity = '0';
         video.pause();
         video.currentTime = 0;
       } else if (currentTime >= introDuration && currentTime < (introDuration + avatarDuration)) {
-        // [2.5s - 39.18s] MAIN SCENE (AVATAR + GRAPHICS)
+        // [2.5s - 42.26s] MAIN SCENE (AVATAR + GRAPHICS)
+        video.style.opacity = '1';
         introLayer.classList.remove('active');
         outroLayer.classList.remove('active');
         watermarkLayer.classList.add('visible');
@@ -274,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
       } else {
-        // [39.18s - 42.18s] OUTRO SCENE
+        // [42.26s - 45.26s] OUTRO SCENE
+        video.style.opacity = '0';
         introLayer.classList.remove('active');
         titleCardLayer.classList.remove('active');
         lowerThirdLayer.classList.remove('visible');
@@ -293,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
       introLayer.classList.remove('active');
 
       if (currentTime < avatarDuration) {
+        video.style.opacity = '1';
         outroLayer.classList.remove('active');
         watermarkLayer.classList.add('visible');
 
@@ -344,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subtitlesLayer.classList.remove('visible');
         watermarkLayer.classList.remove('visible');
         outroLayer.classList.add('active');
+        video.style.opacity = '0';
         video.pause();
       }
     }

@@ -1,43 +1,60 @@
 1
-00:00:00,000 --> 00:00:05,220
-Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage
+00:00:00,570 --> 00:00:03,830
+Rendite ist der prozentuale Wertzuwachs einer Kapitalanlage über
 
 2
-00:00:05,220 --> 00:00:07,400
-über einen bestimmten Zeitraum, üblicherweise auf ein Jahr bezogen.
+00:00:03,830 --> 00:00:07,110
+einen bestimmten Zeitraum, üblicherweise auf ein Jahr bezogen.
 
 3
-00:00:07,400 --> 00:00:11,700
-Sie ist die zentrale Kennzahl, um den Erfolg einer Anlage zu messen
+00:00:07,650 --> 00:00:09,830
+Sie ist die zentrale Kennzahl, um den Erfolg
 
 4
-00:00:11,700 --> 00:00:13,700
-und verschiedene Investments vergleichbar zu machen.
+00:00:09,830 --> 00:00:12,810
+einer Anlage zu messen und verschiedene Investments vergleichbar
 
 5
-00:00:13,700 --> 00:00:17,540
-Wichtig ist die Unterscheidung zwischen nominaler und realer Rendite:
+00:00:12,810 --> 00:00:13,270
+zu machen.
 
 6
-00:00:17,540 --> 00:00:20,800
-Die nominale Rendite gibt den reinen Wertzuwachs an,
+00:00:13,770 --> 00:00:16,730
+Wichtig ist die Unterscheidung zwischen nominaler und realer
 
 7
-00:00:20,800 --> 00:00:24,500
-während die reale Rendite die Inflation herausrechnet und damit zeigt,
+00:00:16,730 --> 00:00:17,190
+Rendite.
 
 8
-00:00:24,500 --> 00:00:27,740
-wie viel Kaufkraft tatsächlich hinzugewonnen wurde.
+00:00:17,790 --> 00:00:20,750
+Die nominale Rendite gibt den reinen Wertzuwachs an,
 
 9
-00:00:27,740 --> 00:00:32,780
-Ebenso relevant ist, ob eine Rendite vor oder nach Kosten und Steuern ausgewiesen wird.
+00:00:20,930 --> 00:00:24,070
+während die reale Rendite die Inflation herausrechnet und
 
 10
-00:00:32,780 --> 00:00:36,500
-Und eine hohe Rendite steht selten für sich allein —
+00:00:24,070 --> 00:00:27,390
+damit zeigt, wie viel Kaufkraft tatsächlich hinzugewonnen wurde.
 
 11
-00:00:36,500 --> 00:00:39,420
-sie ist fast immer die Kompensation für ein entsprechend höheres Risiko.
+00:00:27,390 --> 00:00:30,330
+Ebenso relevant ist, ob eine Rendite vor oder
+
+12
+00:00:30,330 --> 00:00:32,470
+nach Kosten und Steuern ausgewiesen wird.
+
+13
+00:00:32,990 --> 00:00:35,010
+Und eine hohe Rendite steht selten für sich
+
+14
+00:00:35,010 --> 00:00:37,610
+allein, sie ist fast immer die Kompensation für
+
+15
+00:00:37,610 --> 00:00:39,250
+ein entsprechend höheres Risiko.
+
