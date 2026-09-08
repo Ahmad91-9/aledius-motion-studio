@@ -253,6 +253,9 @@ body {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 0 20px rgba(38, 125, 88, 0.7)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.8));
+}
+
+.intro-scene.animating .actual-intro-logo {
   animation: logoScaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -269,8 +272,11 @@ body {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
   transform: skewX(-25deg);
-  animation: shimmerSweep 2.2s 0.6s ease-in-out infinite;
   pointer-events: none;
+}
+
+.intro-scene.animating .shimmer-light {
+  animation: shimmerSweep 2.2s 0.4s ease-in-out infinite;
 }
 
 @keyframes shimmerSweep {
@@ -279,10 +285,8 @@ body {
 }
 
 @keyframes fadeUpText {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .intro-tagline-bar {
@@ -290,8 +294,10 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  opacity: 0;
-  animation: fadeUpText 0.8s 1s ease forwards;
+}
+
+.intro-scene.animating .intro-tagline-bar {
+  animation: fadeUpText 0.8s 0.9s ease forwards;
 }
 
 .category-pill {
@@ -511,7 +517,7 @@ body {
    SCENE 8: ANIMATED OUTRO (3.0s)
    ========================================================= */
 .outro-scene {
-  background: radial-gradient(circle at 50% 50%, rgba(38, 125, 88, 0.35) 0%, rgba(17, 24, 39, 0.98) 75%);
+  background: radial-gradient(circle at 50% 48%, #183e2e 0%, #0f1724 60%, #070a10 100%);
   z-index: 20;
 }
 
@@ -544,6 +550,11 @@ body {
   width: 240px;
   height: auto;
   filter: drop-shadow(0 0 18px rgba(38, 125, 88, 0.6));
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.outro-scene.animating .actual-outro-logo {
   animation: fadeUpText 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -554,6 +565,9 @@ body {
   border-radius: 2px;
   margin: 22px 0 16px 0;
   transform: scaleX(0);
+}
+
+.outro-scene.animating .outro-divider-line {
   animation: lineScale 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -569,6 +583,9 @@ body {
   margin-bottom: 12px;
   opacity: 0;
   transform: translateY(8px);
+}
+
+.outro-scene.animating .outro-claim {
   animation: fadeUpText 0.8s 0.6s ease forwards;
 }
 
@@ -579,8 +596,11 @@ body {
   text-decoration: none;
   letter-spacing: 0.6px;
   opacity: 0;
-  animation: fadeUpText 0.8s 0.8s ease forwards;
   transition: color 0.2s ease;
+}
+
+.outro-scene.animating .outro-website {
+  animation: fadeUpText 0.8s 0.8s ease forwards;
 }
 
 .outro-website:hover {

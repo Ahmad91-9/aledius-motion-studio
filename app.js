@@ -77,6 +77,25 @@ document.addEventListener('DOMContentLoaded', () => {
   let totalDuration = introDuration + avatarDuration + outroDuration; // 45.26s
   let isolatedScene = null; // 'intro', 'tc', 'lt', 'keys', 'outro'
 
+  let introAnimationTriggered = false;
+  let outroAnimationTriggered = false;
+
+  function triggerIntroAnimation() {
+    introLayer.classList.remove('animating');
+    void introLayer.offsetWidth; // Force reflow
+    introLayer.classList.add('animating');
+    playIntroChime();
+    introAnimationTriggered = true;
+  }
+
+  function triggerOutroAnimation() {
+    outroLayer.classList.remove('animating');
+    void outroLayer.offsetWidth; // Force reflow
+    outroLayer.classList.add('animating');
+    playOutroChime();
+    outroAnimationTriggered = true;
+  }
+
   // Canvas dimensions
   function resizeCanvas() {
     canvas.width = canvas.parentElement.clientWidth;
@@ -223,17 +242,24 @@ document.addEventListener('DOMContentLoaded', () => {
         lowerThirdLayer.classList.remove('visible');
         keytermLayer.classList.remove('visible');
         subtitlesLayer.classList.remove('visible');
-        outroLayer.classList.remove('active');
+        outroLayer.classList.remove('active', 'animating');
         watermarkLayer.classList.remove('visible');
+        outroAnimationTriggered = false;
 
         video.style.opacity = '0';
         video.pause();
         video.currentTime = 0;
+
+        if (isPlaying && !introAnimationTriggered) {
+          triggerIntroAnimation();
+        }
       } else if (currentTime >= introDuration && currentTime < (introDuration + avatarDuration)) {
         // [2.5s - 42.26s] MAIN SCENE (AVATAR + GRAPHICS)
         video.style.opacity = '1';
-        introLayer.classList.remove('active');
-        outroLayer.classList.remove('active');
+        introAnimationTriggered = false;
+        introLayer.classList.remove('active', 'animating');
+        outroLayer.classList.remove('active', 'animating');
+        outroAnimationTriggered = false;
         watermarkLayer.classList.add('visible');
 
         const vTime = currentTime - introDuration;
@@ -279,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // [42.26s - 45.26s] OUTRO SCENE
         video.style.opacity = '0';
-        introLayer.classList.remove('active');
+        introLayer.classList.remove('active', 'animating');
         titleCardLayer.classList.remove('active');
         lowerThirdLayer.classList.remove('visible');
         keytermLayer.classList.remove('visible');
@@ -288,6 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
         outroLayer.classList.add('active');
 
         video.pause();
+
+        if (isPlaying && !outroAnimationTriggered) {
+          triggerOutroAnimation();
+        }
       }
 
     } else {
@@ -395,7 +425,14 @@ document.addEventListener('DOMContentLoaded', () => {
     playText.textContent = 'Pause';
     initAudio();
     if (isolatedScene) resetToNormalMode();
-    if (currentTime >= totalDuration) currentTime = 0;
+    if (currentTime >= totalDuration) {
+      currentTime = 0;
+      introAnimationTriggered = false;
+      outroAnimationTriggered = false;
+    }
+    if (isFullMode && currentTime < introDuration && !introAnimationTriggered) {
+      triggerIntroAnimation();
+    }
   }
 
   function pausePlayback() {
@@ -457,12 +494,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetToNormalMode() {
     isolatedScene = null;
-    introLayer.classList.remove('active');
+    introAnimationTriggered = false;
+    outroAnimationTriggered = false;
+    introLayer.classList.remove('active', 'animating');
     titleCardLayer.classList.remove('active');
     lowerThirdLayer.classList.remove('visible');
     keytermLayer.classList.remove('visible');
     subtitlesLayer.classList.remove('visible');
-    outroLayer.classList.remove('active');
+    outroLayer.classList.remove('active', 'animating');
     watermarkLayer.classList.remove('visible');
   }
 
@@ -474,15 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetToNormalMode();
     isolatedScene = 'intro';
     introLayer.classList.add('active');
-    playIntroChime();
-
-    // Re-trigger SVG stroke draw
-    const svgs = introLayer.querySelectorAll('.emblem-border, .emblem-triangle, .emblem-crossbar, .emblem-arch');
-    svgs.forEach(el => {
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
+    triggerIntroAnimation();
   });
 
   btnPreviewTc.addEventListener('click', () => {
@@ -517,15 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetToNormalMode();
     isolatedScene = 'outro';
     outroLayer.classList.add('active');
-    playOutroChime();
-
-    // Re-trigger divider animation
-    const div = outroLayer.querySelector('.outro-divider-line');
-    if (div) {
-      div.style.animation = 'none';
-      void div.offsetWidth;
-      div.style.animation = '';
-    }
+    triggerOutroAnimation();
   });
 
   // Timeline Marker Quick Jumps
