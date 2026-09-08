@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnModeFull = document.getElementById('btn-mode-full');
   const btnModeNoIntro = document.getElementById('btn-mode-nointro');
 
+  const btnZoom75 = document.getElementById('btn-zoom-75');
+  const btnZoom100 = document.getElementById('btn-zoom-100');
+  const viewportWrapper = document.querySelector('.viewport-wrapper');
+  const videoContainer = document.getElementById('video-frame');
+
   const btnPreviewIntro = document.getElementById('btn-preview-intro');
   const btnPreviewTc = document.getElementById('btn-preview-tc');
   const btnPreviewLt = document.getElementById('btn-preview-lt');
@@ -448,6 +453,23 @@ document.addEventListener('DOMContentLoaded', () => {
     resetToNormalMode();
     updateTimeline();
   });
+
+  // Zoom controls (75% default vs 100% full scale)
+  if (btnZoom75 && btnZoom100) {
+    btnZoom75.addEventListener('click', () => {
+      btnZoom75.classList.add('active');
+      btnZoom100.classList.remove('active');
+      videoContainer.classList.remove('zoom-100');
+      viewportWrapper.classList.remove('zoom-100');
+    });
+
+    btnZoom100.addEventListener('click', () => {
+      btnZoom100.classList.add('active');
+      btnZoom75.classList.remove('active');
+      videoContainer.classList.add('zoom-100');
+      viewportWrapper.classList.add('zoom-100');
+    });
+  }
 
   function resetToNormalMode() {
     isolatedScene = null;
